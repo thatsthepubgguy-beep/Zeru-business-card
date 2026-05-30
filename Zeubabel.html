@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZERUBABEL ANTENEH – Links</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #1a1500;
+    --card:      #0d0b08f1;
+    --card2:     #1e160599;
+    --border:    rgba(201, 168, 76, 0.15);
+    --accent:    #c9a84c;
+    --accent2:   #8a6820;
+    --accent-glow: rgba(201, 168, 76, 0.25);
+    --text:      #f5edd6;
+    --muted:     #a07c3a;
+    --label:     #7a5e28;
+    --r:         18px;
+  }
+
+  body {
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    padding: 24px 16px;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ── Liquid morphing blobs in background ── */
+  .blob-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    animation: morphBlob var(--dur, 12s) ease-in-out infinite alternate, floatBlob var(--fdur, 18s) ease-in-out infinite alternate;
+  }
+
+  .blob-1 {
+    width: 380px; height: 380px;
+    background: radial-gradient(circle at 40% 40%, rgba(201, 168, 76, 0.45), rgba(100, 70, 10, 0.2));
+    top: -80px; left: -60px;
+    --dur: 11s; --fdur: 20s;
+    animation-delay: 0s, 0s;
+  }
+  .blob-2 {
+    width: 300px; height: 320px;
+    background: radial-gradient(circle at 60% 30%, rgba(232, 201, 110, 0.3), rgba(138, 104, 32, 0.2));
+    bottom: -60px; right: -40px;
+    --dur: 14s; --fdur: 22s;
+    animation-delay: -4s, -7s;
+  }
+  .blob-3 {
+    width: 220px; height: 250px;
+    background: radial-gradient(circle at 50% 60%, rgba(201, 168, 76, 0.3), rgba(90, 60, 5, 0.12));
+    top: 40%; left: 60%;
+    --dur: 9s; --fdur: 16s;
+    animation-delay: -2s, -3s;
+  }
+  .blob-4 {
+    width: 180px; height: 200px;
+    background: radial-gradient(circle at 40% 40%, rgba(232, 201, 110, 0.2), transparent);
+    top: 30%; left: -30px;
+    --dur: 16s; --fdur: 25s;
+    animation-delay: -6s, -10s;
+  }
+
+  @keyframes morphBlob {
+    0%   { border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%; transform: scale(1) rotate(0deg); }
+    25%  { border-radius: 40% 70% 30% 60% / 70% 40% 60% 50%; transform: scale(1.05) rotate(8deg); }
+    50%  { border-radius: 70% 30% 50% 60% / 40% 70% 50% 60%; transform: scale(0.95) rotate(-5deg); }
+    75%  { border-radius: 30% 60% 70% 40% / 60% 50% 70% 40%; transform: scale(1.08) rotate(12deg); }
+    100% { border-radius: 55% 45% 40% 70% / 65% 35% 65% 45%; transform: scale(1) rotate(0deg); }
+  }
+
+  @keyframes floatBlob {
+    0%   { transform: translate(0px, 0px); }
+    33%  { transform: translate(30px, -25px); }
+    66%  { transform: translate(-20px, 20px); }
+    100% { transform: translate(15px, -15px); }
+  }
+
+  /* Subtle radial gradient overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% -10%, rgba(201, 168, 76, 0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(138, 104, 32, 0.07) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Main Card — liquid glass ── */
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    background: rgba(14, 21, 32, 0.55);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border-radius: 32px;
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    padding: 36px 20px 28px;
+    box-shadow:
+      0 0 0 1px rgba(201,168,76,0.07),
+      0 24px 80px rgba(0,0,0,0.7),
+      0 0 120px rgba(201,168,76,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.07),
+      inset 0 -1px 0 rgba(0,0,0,0.2);
+    animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) both;
+    overflow: hidden;
+  }
+
+  /* Inner liquid shimmer layer */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 100% 100%, rgba(201,168,76,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+    border-radius: inherit;
+  }
+
+  /* Flowing liquid highlight at top edge */
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), rgba(255,240,180,0.3), rgba(201,168,76,0.5), transparent);
+    animation: liquidShine 4s ease-in-out infinite;
+  }
+
+  @keyframes liquidShine {
+    0%, 100% { opacity: 0.4; transform: scaleX(0.8); }
+    50%       { opacity: 1;   transform: scaleX(1.1); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* All children above pseudo layers */
+  .card > * { position: relative; z-index: 1; }
+
+  /* ── Header ── */
+  .header { text-align: center; margin-bottom: 28px; }
+
+  .avatar-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .avatar-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    z-index: 0;
+    animation: spin 6s linear infinite;
+  }
+  .avatar-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+    z-index: -1;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 0.5; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.08); }
+  }
+
+  .avatar {
+    position: relative;
+    z-index: 1;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(26, 21, 0, 0.5);
+    background: linear-gradient(135deg, #1a2d45, #0e1d30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+
+  .name-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-bottom: 5px;
+  }
+  .name {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .badge svg { width: 11px; height: 11px; }
+
+  .handle {
+    color: var(--muted);
+    font-size: 13.5px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .bio {
+    color: var(--label);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* ── Social Links ── */
+  .links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    /* Liquid glass button */
+    background: rgba(30, 20, 5, 0.45);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: var(--r);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease both;
+    box-shadow:
+      inset 0 1px 0 rgba(201,168,76,0.08),
+      inset 0 -1px 0 rgba(0,0,0,0.2),
+      0 4px 16px rgba(0,0,0,0.3);
+  }
+  .link-btn:nth-child(1) { animation-delay: 0.10s; }
+  .link-btn:nth-child(2) { animation-delay: 0.18s; }
+  .link-btn:nth-child(3) { animation-delay: 0.26s; }
+  .link-btn:nth-child(4) { animation-delay: 0.34s; }
+  .link-btn:nth-child(5) { animation-delay: 0.42s; }
+  .link-btn:nth-child(6) { animation-delay: 0.50s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Liquid ripple sheen on hover */
+  .link-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg,
+      transparent 0%,
+      rgba(201,168,76,0.04) 30%,
+      rgba(255,230,120,0.09) 50%,
+      rgba(201,168,76,0.04) 70%,
+      transparent 100%
+    );
+    transform: translateX(-100%) skewX(-15deg);
+    transition: transform 0.7s ease;
+  }
+  .link-btn:hover::before { transform: translateX(200%) skewX(-15deg); }
+
+  /* Morphing border on hover */
+  .link-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(138,104,32,0.06));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .link-btn:hover::after { opacity: 1; }
+
+  .link-btn:hover {
+    border-color: rgba(201, 168, 76, 0.5);
+    background: rgba(50, 35, 5, 0.55);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow:
+      inset 0 1px 0 rgba(201,168,76,0.15),
+      0 12px 32px rgba(201,168,76,0.15),
+      0 0 0 1px rgba(201,168,76,0.2);
+    border-radius: 20px;
+  }
+
+  .link-btn.active {
+    background: rgba(60, 42, 5, 0.5);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-color: rgba(201, 168, 76, 0.5);
+    box-shadow:
+      inset 0 1px 0 rgba(201,168,76,0.1),
+      0 0 0 1px rgba(201, 168, 76, 0.2),
+      0 8px 32px rgba(201,168,76,0.12);
+  }
+
+  .icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: inset 0 1px 0 rgba(201,168,76,0.08);
+  }
+  .link-btn:hover .icon-box {
+    background: rgba(201,168,76,0.18);
+    border-color: rgba(201,168,76,0.35);
+    box-shadow: 0 0 16px rgba(201,168,76,0.2), inset 0 1px 0 rgba(255,220,100,0.15);
+    border-radius: 14px;
+    transform: rotate(-3deg) scale(1.05);
+  }
+
+  .link-text { flex: 1; min-width: 0; }
+  .link-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .link-sub {
+    font-size: 11.5px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .arrow {
+    color: var(--muted);
+    font-size: 16px;
+    transition: transform 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+  .link-btn:hover .arrow { transform: translateX(3px); color: var(--accent); }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent);
+    margin: 20px 0 16px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    animation: fadeIn 0.5s 0.55s ease both;
+  }
+  .footer-link {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .footer-link:hover { color: var(--accent); }
+  .footer-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+  }
+
+  /* Responsive */
+  @media (max-width: 360px) {
+    .name { font-size: 20px; }
+    .card { padding: 28px 16px 22px; }
+  }
+  @media (min-width: 600px) {
+    .card { border-radius: 36px; padding: 44px 32px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Liquid morphing blobs -->
+<div class="blob-container">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<div class="card">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="avatar-wrap">
+      <div class="avatar">
+        <img src="zera.jpg" alt="Kaleab Abera" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+    <div class="name-row">
+      <span class="name">Zerubabel Anteneh</span>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 13l4 4L19 7" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+    <p class="handle">@zeru_babel_1</p>
+    <p class="bio">Marketing Manager<br>Crafting growth strategies and modern marketing solutions to scale your business.</p>
+  </div>
+
+  <!-- Social Links -->
+  <div class="links">
+
+    <a href="https://thatsthepubgguy-beep.github.io/zera/" target="_blank" class="link-btn active">
+      <div class="icon-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">My Portfolio</div>
+        <div class="link-sub">Zerubabel Anteneh</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://www.instagram.com/zeru_babel_1/" target="_blank" class="link-btn">
+      <div class="icon-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Instagram</div>
+        <div class="link-sub">@zeru_babel_1</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://www.tiktok.com/@one.man_production?is_from_webapp=1&sender_device=pc" target="_blank" class="link-btn">
+      <div class="icon-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">TikTok</div>
+        <div class="link-sub">@one.man_production</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" target="_blank" class="link-btn">
+      <div class="icon-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+          <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">YouTube</div>
+        <div class="link-sub">Zerubabel Anteneh</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="https://t.me/zeru_babel6" target="_blank" class="link-btn">
+      <div class="icon-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);">
+          <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.03 6.653a2.24 2.24 0 0 0 .104 4.218l3.74 1.227 1.865 5.798a2.24 2.24 0 0 0 4.068.002l1.865-5.797 3.74-1.228a2.242 2.242 0 0 0 1.57-2.13V4.677a2.242 2.242 0 0 0-2.4-2.244zM9.3 13.52l-.673 2.093-.98-3.05 5.146-3.37-3.493 4.327z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Telegram</div>
+        <div class="link-sub">@zeru_babel6</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="link-btn" onclick="handleSave(event)">
+      <div class="icon-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Save My Contact</div>
+        <div class="link-sub">Add to your phone</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <a href="https://thatsthepubgguy-beep.github.io/zera/" target="_blank" class="footer-link">
+      <span class="footer-dot"></span>
+      ONE-MAN Production
+    </a>
+  </div>
+
+</div>
+
+<script>
+  function handleSave(e) {
+    e.preventDefault();
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Zerubabel Anteneh
+TITLE:Website Developer & Video Editor
+TEL:+251931512124
+ORG:ONE-MAN
+URL:https://thatsthepubgguy-beep.github.io/zera/
+END:VCARD`;
+    const blob = new Blob([vcard], { type: 'text/vcard' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ZERUBABEL.vcf';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body>
+</html>
